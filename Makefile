@@ -25,9 +25,9 @@ INSTALL = /usr/bin/install
 
 ## Should be no need to edit anything below here.
 
-.PHONY: install clean
+.PHONY: clean compile install
 
-all: install
+all: install compile
 
 LIBS =	\
 	reload.chezscheme.sls
@@ -45,7 +45,9 @@ $(LIBDIR)/%.sls: %.sls
 $(LIBDIR)/%.so: $(LIBDIR)/%.sls
 	$(ECHO) '(reset-handler abort) (library-directories "'$(LIBDIR)'") (compile-library "'$<'")' | $(SCHEME) $(SFLAGS)
 
-install: $(ILIBS) $(ILIBSO)
+install: $(ILIBS)
+
+compile: $(ILIBSO)
 
 clean:
-	$(RM) $(ILIBS) $(ILIBSO)
+	$(RM) -f $(ILIBS) $(ILIBSO)
