@@ -1,4 +1,4 @@
-# Chez reload GNU Makefile.
+# Chez dynamic GNU Makefile.
 #
 # This makefile installs the source at the destination and then uses
 # (compile-library) to compile in place.
@@ -30,7 +30,7 @@ INSTALL = /usr/bin/install
 all: install compile
 
 LIBS =	\
-	reload.chezscheme.sls
+	dynamic.chezscheme.sls
 
 # installed lib sources.
 ILIBS = $(addprefix $(LIBDIR)/,$(LIBS))
