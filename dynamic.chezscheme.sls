@@ -51,7 +51,7 @@
   (syntax-rules ()
     [(_ import-spec)
      (let-values ([(source-file object-file libobj-exists?)
-                   (default-library-search-handler 'reimport 'import-spec (library-directories) (library-extensions))])
+                   ((library-search-handler) 'reimport 'import-spec (library-directories) (library-extensions))])
        (cond
          [source-file
            (when (import-notify)
