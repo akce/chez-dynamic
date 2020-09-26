@@ -12,8 +12,33 @@
 ;; SPDX-License-Identifier: Unlicense
 
 (library (dynamic)
-  (export reimport)
+  (export
+    case-import
+    reimport)
   (import (chezscheme))
+
+(define has-import
+  (lambda (who library-tag)
+    (let-values ([(source-file object-file obj-exists?)
+                  ((library-search-handler) who library-tag (library-directories) (library-extensions))])
+      (or source-file obj-exists?))))
+
+;; [syntax] case-import: conditionally import a library.
+;; case-import has a similar syntax to case-lambda except its clauses attempt to import a library.
+;;
+;; Limitations:
+;; - many
+;; - import-spec can only contain the library path. Specifiers such as only, prefix etc are not supported.
+;; - the existance of the library source or object file implies success. No checks are made to see whether the actual import succeeds.
+;;
+;; TODO: add support for an optional sentinal (ala syntax-case)?
+(define-syntax case-import
+  (syntax-rules ()
+    [(_ (import-spec body ...) ...)
+     (meta-cond
+       [(has-import 'case-import 'import-spec)
+        (import import-spec)
+        body ...] ...)]))
 
 ;; [syntax] reimport import-spec
 ;; Turn on (import-notify) to see reimport messages.
