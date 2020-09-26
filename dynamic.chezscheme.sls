@@ -14,8 +14,19 @@
 (library (dynamic)
   (export
     case-import
+    current-environment
     reimport)
   (import (chezscheme))
+
+(define current-environment
+  (make-parameter
+    (interaction-environment)
+    (lambda (p)
+      (cond
+        [(environment? p)
+         p]
+        [else
+          (error 'current-environment "must be an environment object." p)]))))
 
 (define has-import
   (lambda (who library-tag)
@@ -59,7 +70,7 @@
            ;; Update definitions.
            (load source-file)
            ;; Update library bindings.
-           (eval '(import import-spec) (interaction-environment))]
+           (eval '(import import-spec) (current-environment))]
          [else
            (error 'reimport "library source not found" 'import-spec (library-directories) (library-extensions))]))]))
 )
