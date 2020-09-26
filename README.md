@@ -2,6 +2,29 @@
 
 *chez-dynamic* is a collection of functions / syntax (macros) that aid in dynamic development when using *Chez* scheme.
 
+## Install and use
+
+The supplied GNU Makefile will install to *LIBDIR*. The default location is *~/lib*.
+
+*LIBDIR* must be in **(library-directories)** to be usable from *Chez scheme*.
+
+eg,
+```
+$ make install
+```
+
+To override LIBDIR:
+
+```
+$ make LIBDIR=~/newlibdir install
+```
+
+To use from *Chez* scheme:
+
+```scheme
+(import (dynamic))
+```
+
 ## reimport
 
 **reimport** allows for reloading R6RS libraries in *Chez* scheme.
