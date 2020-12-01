@@ -4,7 +4,7 @@
 
 ## Install and use
 
-The supplied GNU Makefile will install to *LIBDIR*. The default location is *~/lib*.
+The supplied GNU Makefile will install to *LIBDIR*. The default location is *~/lib/csv<CHEZ-SCHEME-VERSION>*.
 
 *LIBDIR* must be in **(library-directories)** to be usable from *Chez scheme*.
 

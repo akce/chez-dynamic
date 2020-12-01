@@ -11,7 +11,7 @@
 
 # Library destination directory. This must be an object directory contained in
 # (library-directories).  eg, set in CHEZSCHEMELIBDIRS environment variable.
-LIBDIR := $(HOME)/lib
+LIBDIR = $(HOME)/lib/csv$(shell $(SCHEME) --version 2>&1)
 
 # Path to chez scheme executable.
 SCHEME = /usr/bin/chez-scheme
